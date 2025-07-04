@@ -55,7 +55,36 @@ npm run dev
 
 4. Open your browser and visit `http://localhost:5173`
 
-## 📦 Available Scripts
+## � Deployment
+
+This site is automatically deployed to GitHub Pages using GitHub Actions.
+
+### Live Site
+Visit the live portfolio at: `https://kailashrajh.github.io/kr-cv/`
+
+### Automatic Deployment
+- Every push to the `main` branch triggers an automatic build and deployment
+- The site is built using Vite and deployed to GitHub Pages
+- Build status can be monitored in the Actions tab of the repository
+
+### Manual Deployment
+If you need to deploy manually:
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. The built files will be in the `dist` folder
+
+### GitHub Pages Setup
+To enable GitHub Pages for your repository:
+1. Go to your repository settings
+2. Navigate to "Pages" section
+3. Under "Source", select "GitHub Actions"
+4. The workflow will handle the rest automatically
+
+## �📦 Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
