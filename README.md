@@ -4,122 +4,129 @@ A modern, responsive portfolio website showcasing the professional experience an
 
 ## 🚀 Built With
 
-- **React 18** with TypeScript for type safety
-- **Vite** for fast development and building
-- **Tailwind CSS** for modern, responsive styling
-- **Framer Motion** for smooth animations and interactions
-- **Lucide React** for beautiful icons
+- **HTML5** - Clean, semantic markup
+- **Tailwind CSS** - Modern, responsive styling via CDN
+- **Vanilla JavaScript** - Lightweight interactivity
+- **Lucide Icons** - Beautiful icon library
 
 ## ✨ Features
 
+- **Framework-Free**: Pure HTML, CSS, and JavaScript - no build process required
 - **Responsive Design**: Optimized for all screen sizes from mobile to desktop
-- **Smooth Animations**: Engaging transitions and micro-interactions
-- **Modern UI/UX**: Clean, professional design with attention to detail
-- **Performance Optimized**: Fast loading and smooth scrolling
+- **Smooth Animations**: CSS transitions and JavaScript-powered scroll animations
+- **Modern UI/UX**: Clean, professional design with Kanagawa color palette
+- **Performance Optimized**: Fast loading with minimal dependencies
 - **Accessibility**: Built with semantic HTML and accessibility best practices
 - **SEO Friendly**: Proper meta tags and structure
+- **GitHub Pages Ready**: Direct deployment without build steps
 
 ## 📋 Sections
 
 - **Hero**: Introduction with name, title, and call-to-action
 - **About**: Professional background and core competencies
-- **Skills**: Technical skills with proficiency levels and technologies
+- **Skills**: Technical skills with animated progress bars and technologies
 - **Experience**: Detailed work history with achievements and projects
 - **Education**: Academic background and coursework
+- **Certifications**: Professional certifications with verification links
 - **Contact**: Multiple ways to get in touch
 
 ## 🛠️ Getting Started
 
-### Prerequisites
+### No Prerequisites Required!
 
-- Node.js (version 18 or higher)
-- npm or yarn
+This is a static HTML website that requires no installation or build process.
 
-### Installation
+### Local Development
 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd brisingr
+cd kr-cv
 ```
 
-2. Install dependencies:
+2. Open the website:
 ```bash
-npm install
+# Option 1: Simply open in browser
+open index.html
+
+# Option 2: Use a local server (optional)
+python -m http.server 8000
+# or
+npx serve .
 ```
 
-3. Start the development server:
-```bash
-npm run dev
+3. Open your browser and visit the file directly or `http://localhost:8000`
+
+## 🌐 Deployment
+
+### GitHub Pages (Recommended)
+
+1. Push your code to GitHub
+2. Go to repository Settings → Pages
+3. Select "Deploy from a branch" 
+4. Choose "main" branch and "/ (root)" folder
+5. Your site will be live at `https://[username].github.io/kr-cv/`
+
+### Other Static Hosting Options
+
+This site can be deployed to any static hosting service:
+- **Netlify**: Drag and drop the folder
+- **Vercel**: Connect your GitHub repository
+- **GitHub Pages**: As described above
+- **Surge.sh**: `surge .`
+
+## 📦 Project Structure
+
 ```
-
-4. Open your browser and visit `http://localhost:5173`
-
-## � Deployment
-
-This site is automatically deployed to GitHub Pages using GitHub Actions.
-
-### Live Site
-Visit the live portfolio at: `https://kailashrajh.github.io/kr-cv/`
-
-### Automatic Deployment
-- Every push to the `main` branch triggers an automatic build and deployment
-- The site is built using Vite and deployed to GitHub Pages
-- Build status can be monitored in the Actions tab of the repository
-
-### Manual Deployment
-If you need to deploy manually:
-
-1. Build the project:
-```bash
-npm run build
+kr-cv/
+├── index.html          # Main HTML file with all content
+├── README.md           # This file
+├── CLAUDE.md           # AI assistant instructions
+└── .gitignore          # Git ignore rules
 ```
-
-2. The built files will be in the `dist` folder
-
-### GitHub Pages Setup
-To enable GitHub Pages for your repository:
-1. Go to your repository settings
-2. Navigate to "Pages" section
-3. Under "Source", select "GitHub Actions"
-4. The workflow will handle the rest automatically
-
-## �📦 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
 
 ## 🎨 Customization
 
 ### Colors
-The color scheme can be customized in `tailwind.config.js`. The primary color palette uses blue tones but can be easily adjusted.
+The color scheme uses the Kanagawa theme defined in the Tailwind configuration within `index.html`. You can customize colors by modifying the `tailwind.config` object.
 
 ### Content
-All content is defined within the individual components in the `src/components` directory:
-- Personal information in `Hero.tsx` and `Contact.tsx`
-- Professional experience in `Experience.tsx`
-- Skills and technologies in `Skills.tsx`
-- Education details in `Education.tsx`
+All content is embedded directly in `index.html`:
+- Personal information in the Hero and Contact sections
+- Professional experience in the Experience section
+- Skills and technologies in the Skills section
+- Education details in the Education section
 
 ### Animations
-Animations are handled by Framer Motion and can be customized in each component's motion variants.
+Animations are handled by:
+- CSS transitions for hover effects
+- Intersection Observer API for scroll animations
+- Custom JavaScript for skill bar animations
 
 ## 📱 Responsive Design
 
 The website is fully responsive with:
-- Mobile-first approach
+- Mobile-first approach using Tailwind CSS
 - Flexible grid layouts
 - Adaptive typography
 - Touch-friendly interactive elements
+- Collapsible mobile navigation
 
 ## 🌟 Performance
 
-- Lazy loading for images
-- Optimized animations
-- Minimal bundle size
-- Fast loading times
+- **Zero build time**: No compilation or bundling required
+- **Minimal dependencies**: Only CDN resources (Tailwind CSS, Lucide Icons)
+- **Optimized loading**: Efficient CSS and JavaScript
+- **Fast loading times**: Static HTML with minimal overhead
+
+## 🔧 Technical Features
+
+- **Smooth scrolling navigation** with active link highlighting
+- **Animated skill bars** that fill on scroll
+- **Mobile-friendly hamburger menu**
+- **Scroll-triggered animations** using Intersection Observer
+- **Responsive images and layouts**
+- **Semantic HTML5** structure
 
 ## 📞 Contact
 
@@ -127,49 +134,12 @@ The website is fully responsive with:
 - Email: kailash.rajh@gmail.com
 - Phone: 071-605-3159
 - Location: South Africa
+- LinkedIn: [linkedin.com/in/kailashrajh](https://linkedin.com/in/kailashrajh)
 
 ## 📄 License
 
 This project is for personal portfolio use. Feel free to use it as inspiration for your own portfolio!
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+*Built with HTML, CSS, and JavaScript - Simple, fast, and effective!*

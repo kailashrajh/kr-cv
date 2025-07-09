@@ -1,13 +1,994 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kailash Rajh - Portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kailash Rajh - Software Engineer</title>
+    <meta name="description" content="Software Engineer and Test Automation Specialist with expertise in C#, TypeScript, Azure, and modern web technologies.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f7f3f0',
+                            100: '#ede4d3',
+                            200: '#dcd5c0',
+                            300: '#c8b99c',
+                            400: '#b6a082',
+                            500: '#a3956b',
+                            600: '#8a7c5a',
+                            700: '#6f6247',
+                            800: '#54493a',
+                            900: '#3c342c',
+                        },
+                        kanagawa: {
+                            bg: '#1f1f28',
+                            bgDark: '#16161d',
+                            bgLight: '#2a2a37',
+                            fg: '#dcd7ba',
+                            fgDark: '#c8c093',
+                            wave: '#223249',
+                            waveLight: '#2d4f67',
+                            red: '#c34043',
+                            orange: '#ffa066',
+                            yellow: '#c0a36e',
+                            green: '#76946a',
+                            blue: '#7e9cd8',
+                            purple: '#957fb8',
+                            pink: '#d27e99',
+                            teal: '#7aa89f',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                        'raleway': ['Raleway', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .skill-bar {
+            width: 0%;
+            transition: width 1s ease-out;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #1f1f28;
+            color: #dcd7ba;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-kanagawa-bg text-kanagawa-fg">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-kanagawa-bg/90 backdrop-blur-sm z-50 border-b border-kanagawa-wave">
+        <div class="section-container">
+            <div class="flex items-center justify-between py-4">
+                <div class="text-xl font-bold text-kanagawa-fg">
+                    KR
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#hero" class="nav-link text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors">Home</a>
+                    <a href="#about" class="nav-link text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors">About</a>
+                    <a href="#skills" class="nav-link text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors">Skills</a>
+                    <a href="#experience" class="nav-link text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors">Experience</a>
+                    <a href="#education" class="nav-link text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors">Education</a>
+                    <a href="#certifications" class="nav-link text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors">Certifications</a>
+                    <a href="#contact" class="nav-link text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-toggle" class="md:hidden text-kanagawa-fg">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-kanagawa-bgLight transform translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden">
+        <div class="p-6">
+            <button id="mobile-menu-close" class="absolute top-6 right-6 text-kanagawa-fg">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="mt-12 space-y-6">
+                <a href="#hero" class="block text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors mobile-nav-link">Home</a>
+                <a href="#about" class="block text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors mobile-nav-link">About</a>
+                <a href="#skills" class="block text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors mobile-nav-link">Skills</a>
+                <a href="#experience" class="block text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors mobile-nav-link">Experience</a>
+                <a href="#education" class="block text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors mobile-nav-link">Education</a>
+                <a href="#certifications" class="block text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors mobile-nav-link">Certifications</a>
+                <a href="#contact" class="block text-kanagawa-fgDark hover:text-kanagawa-blue transition-colors mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative">
+        <div class="section-container text-center text-kanagawa-fg">
+            <div class="animate-on-scroll">
+                <h1 class="text-5xl md:text-7xl font-bold font-raleway mb-6">
+                    <span class="text-kanagawa-fgDark">KAILASH</span>
+                    <span class="text-kanagawa-fg">RAJH</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-kanagawa-yellow mb-8 max-w-3xl mx-auto">
+                    Software Engineer | Test Automation Specialist
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                    <p class="text-kanagawa-fgDark">kailash.rajh@gmail.com</p>
+                    <span class="hidden sm:inline-block text-kanagawa-teal">|</span>
+                    <p class="text-kanagawa-fgDark">071-605-3159</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToSection('about')" class="bg-kanagawa-blue hover:bg-kanagawa-purple text-kanagawa-fg font-medium py-3 px-6 rounded-lg transition-colors duration-200 inline-flex items-center gap-2">
+                        View My Work
+                    </button>
+                    <a href="#contact" class="bg-transparent border-2 border-kanagawa-orange text-kanagawa-orange hover:bg-kanagawa-orange hover:text-kanagawa-bg font-medium py-3 px-6 rounded-lg transition-colors duration-200 inline-flex items-center gap-2">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-float" onclick="scrollToSection('about')">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-kanagawa-teal opacity-70 hover:opacity-100"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-kanagawa-bgLight">
+        <div class="section-container">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-kanagawa-fg">
+                    About Me
+                </h2>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="animate-on-scroll">
+                        <h3 class="text-2xl font-semibold mb-6 text-kanagawa-yellow">
+                            Passionate Software Developer & Quality Engineer
+                        </h3>
+                        <div class="space-y-4 text-kanagawa-fgDark leading-relaxed">
+                            <p>
+                                I'm a dedicated software developer with over 5 years of experience in full-stack development 
+                                and software testing. Currently working at Derivco as a Developer L2 and was previously a Software Development 
+                                Engineer in Test (SDET) L2, I specialize in building robust, scalable applications and 
+                                comprehensive testing solutions.
+                            </p>
+                            <p>
+                                My journey started with a Bachelor's degree in Computer and Information Sciences from 
+                                IIE Varsity College, where I developed a strong foundation in Object-Oriented Programming, 
+                                database management, and cloud computing.
+                            </p>
+                            <p>
+                                I'm passionate about delivering high-quality software solutions and have experience with 
+                                modern technologies including React, Angular, .NET, Azure, and various testing frameworks. 
+                                I thrive in collaborative environments and enjoy solving complex technical challenges.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid gap-6 animate-on-scroll">
+                        <div class="flex items-start space-x-4 p-6 bg-kanagawa-bg rounded-lg border border-kanagawa-wave">
+                            <i data-lucide="code" class="w-8 h-8 text-kanagawa-blue flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-kanagawa-fg mb-2">Full Stack Development</h4>
+                                <p class="text-kanagawa-fgDark text-sm">
+                                    Building end-to-end applications with modern frameworks and best practices
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 p-6 bg-kanagawa-bg rounded-lg border border-kanagawa-wave">
+                            <i data-lucide="database" class="w-8 h-8 text-kanagawa-green flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-kanagawa-fg mb-2">Test Automation</h4>
+                                <p class="text-kanagawa-fgDark text-sm">
+                                    Creating comprehensive test suites and automation frameworks for quality assurance
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 p-6 bg-kanagawa-bg rounded-lg border border-kanagawa-wave">
+                            <i data-lucide="globe" class="w-8 h-8 text-kanagawa-teal flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-kanagawa-fg mb-2">Cloud & DevOps</h4>
+                                <p class="text-kanagawa-fgDark text-sm">
+                                    Implementing CI/CD pipelines and cloud-based solutions for scalable applications
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-kanagawa-bg">
+        <div class="section-container">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-kanagawa-fg">
+                    Skills & Technologies
+                </h2>
+
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Technical Skills -->
+                    <div class="space-y-8">
+                        <div class="animate-on-scroll">
+                            <h3 class="text-2xl font-semibold mb-6 text-kanagawa-yellow">Programming Languages</h3>
+                            <div class="space-y-4">
+                                <div class="skill-item">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium text-kanagawa-fg">C#</span>
+                                        <span class="text-sm text-kanagawa-fgDark">90%</span>
+                                    </div>
+                                    <div class="w-full bg-kanagawa-wave rounded-full h-2">
+                                        <div class="skill-bar bg-kanagawa-blue h-2 rounded-full" data-width="90"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium text-kanagawa-fg">TypeScript</span>
+                                        <span class="text-sm text-kanagawa-fgDark">85%</span>
+                                    </div>
+                                    <div class="w-full bg-kanagawa-wave rounded-full h-2">
+                                        <div class="skill-bar bg-kanagawa-blue h-2 rounded-full" data-width="85"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium text-kanagawa-fg">JavaScript</span>
+                                        <span class="text-sm text-kanagawa-fgDark">88%</span>
+                                    </div>
+                                    <div class="w-full bg-kanagawa-wave rounded-full h-2">
+                                        <div class="skill-bar bg-kanagawa-blue h-2 rounded-full" data-width="88"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium text-kanagawa-fg">Java</span>
+                                        <span class="text-sm text-kanagawa-fgDark">75%</span>
+                                    </div>
+                                    <div class="w-full bg-kanagawa-wave rounded-full h-2">
+                                        <div class="skill-bar bg-kanagawa-blue h-2 rounded-full" data-width="75"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium text-kanagawa-fg">SQL</span>
+                                        <span class="text-sm text-kanagawa-fgDark">80%</span>
+                                    </div>
+                                    <div class="w-full bg-kanagawa-wave rounded-full h-2">
+                                        <div class="skill-bar bg-kanagawa-blue h-2 rounded-full" data-width="80"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="animate-on-scroll">
+                            <h3 class="text-xl font-semibold mb-4 text-kanagawa-orange">Frameworks & Libraries</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">Blazor</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">Angular</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">React</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">Vue.js</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">Node.js</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">Express</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">.NET Framework/Core</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">ADO.NET</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">WPF</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">Capacitor</span>
+                                <span class="px-3 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded-full text-sm font-medium border border-kanagawa-blue/30">Ionic</span>
+                            </div>
+                        </div>
+
+                        <div class="animate-on-scroll">
+                            <h3 class="text-xl font-semibold mb-4 text-kanagawa-green">Databases</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-green/20 text-kanagawa-green rounded-full text-sm font-medium border border-kanagawa-green/30">MSSQL</span>
+                                <span class="px-3 py-1 bg-kanagawa-green/20 text-kanagawa-green rounded-full text-sm font-medium border border-kanagawa-green/30">Firebase</span>
+                                <span class="px-3 py-1 bg-kanagawa-green/20 text-kanagawa-green rounded-full text-sm font-medium border border-kanagawa-green/30">Entity Framework</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud, Testing & Tools -->
+                    <div class="space-y-8">
+                        <div class="animate-on-scroll">
+                            <h3 class="text-xl font-semibold mb-4 text-kanagawa-teal">Cloud & DevOps</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-teal/20 text-kanagawa-teal rounded-full text-sm font-medium border border-kanagawa-teal/30">Azure Cloud</span>
+                                <span class="px-3 py-1 bg-kanagawa-teal/20 text-kanagawa-teal rounded-full text-sm font-medium border border-kanagawa-teal/30">Azure AI Services</span>
+                                <span class="px-3 py-1 bg-kanagawa-teal/20 text-kanagawa-teal rounded-full text-sm font-medium border border-kanagawa-teal/30">Azure Pipelines</span>
+                                <span class="px-3 py-1 bg-kanagawa-teal/20 text-kanagawa-teal rounded-full text-sm font-medium border border-kanagawa-teal/30">Docker</span>
+                                <span class="px-3 py-1 bg-kanagawa-teal/20 text-kanagawa-teal rounded-full text-sm font-medium border border-kanagawa-teal/30">Kubernetes</span>
+                                <span class="px-3 py-1 bg-kanagawa-teal/20 text-kanagawa-teal rounded-full text-sm font-medium border border-kanagawa-teal/30">Terraform</span>
+                            </div>
+                        </div>
+
+                        <div class="animate-on-scroll">
+                            <h3 class="text-xl font-semibold mb-4 text-kanagawa-purple">Testing & QA</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-purple/20 text-kanagawa-purple rounded-full text-sm font-medium border border-kanagawa-purple/30">NUnit</span>
+                                <span class="px-3 py-1 bg-kanagawa-purple/20 text-kanagawa-purple rounded-full text-sm font-medium border border-kanagawa-purple/30">Playwright</span>
+                                <span class="px-3 py-1 bg-kanagawa-purple/20 text-kanagawa-purple rounded-full text-sm font-medium border border-kanagawa-purple/30">WireMock</span>
+                                <span class="px-3 py-1 bg-kanagawa-purple/20 text-kanagawa-purple rounded-full text-sm font-medium border border-kanagawa-purple/30">FluentAssertions</span>
+                                <span class="px-3 py-1 bg-kanagawa-purple/20 text-kanagawa-purple rounded-full text-sm font-medium border border-kanagawa-purple/30">Test Automation</span>
+                                <span class="px-3 py-1 bg-kanagawa-purple/20 text-kanagawa-purple rounded-full text-sm font-medium border border-kanagawa-purple/30">CI/CD</span>
+                            </div>
+                        </div>
+
+                        <div class="animate-on-scroll">
+                            <h3 class="text-xl font-semibold mb-4 text-kanagawa-orange">Tools & Others</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-orange/20 text-kanagawa-orange rounded-full text-sm font-medium border border-kanagawa-orange/30">Git</span>
+                                <span class="px-3 py-1 bg-kanagawa-orange/20 text-kanagawa-orange rounded-full text-sm font-medium border border-kanagawa-orange/30">GitHub</span>
+                                <span class="px-3 py-1 bg-kanagawa-orange/20 text-kanagawa-orange rounded-full text-sm font-medium border border-kanagawa-orange/30">Azure DevOps</span>
+                                <span class="px-3 py-1 bg-kanagawa-orange/20 text-kanagawa-orange rounded-full text-sm font-medium border border-kanagawa-orange/30">Dapr</span>
+                                <span class="px-3 py-1 bg-kanagawa-orange/20 text-kanagawa-orange rounded-full text-sm font-medium border border-kanagawa-orange/30">Traefik</span>
+                                <span class="px-3 py-1 bg-kanagawa-orange/20 text-kanagawa-orange rounded-full text-sm font-medium border border-kanagawa-orange/30">Google Maps API</span>
+                                <span class="px-3 py-1 bg-kanagawa-orange/20 text-kanagawa-orange rounded-full text-sm font-medium border border-kanagawa-orange/30">Stripe</span>
+                            </div>
+                        </div>
+
+                        <div class="animate-on-scroll">
+                            <h3 class="text-xl font-semibold mb-4 text-kanagawa-pink">Soft Skills</h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex items-center p-3 bg-kanagawa-bgLight rounded-lg shadow-sm border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-pink rounded-full mr-3"></div>
+                                    <span class="text-kanagawa-fg text-sm">Problem-solving</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-kanagawa-bgLight rounded-lg shadow-sm border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-pink rounded-full mr-3"></div>
+                                    <span class="text-kanagawa-fg text-sm">Effective Communication</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-kanagawa-bgLight rounded-lg shadow-sm border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-pink rounded-full mr-3"></div>
+                                    <span class="text-kanagawa-fg text-sm">Team Collaboration</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-kanagawa-bgLight rounded-lg shadow-sm border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-pink rounded-full mr-3"></div>
+                                    <span class="text-kanagawa-fg text-sm">Time Management</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-kanagawa-bgLight rounded-lg shadow-sm border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-pink rounded-full mr-3"></div>
+                                    <span class="text-kanagawa-fg text-sm">Adaptability</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-kanagawa-bgLight rounded-lg shadow-sm border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-pink rounded-full mr-3"></div>
+                                    <span class="text-kanagawa-fg text-sm">Solution Delivery</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-kanagawa-bgLight">
+        <div class="section-container">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-kanagawa-fg">
+                    Professional Experience
+                </h2>
+
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-0.5 bg-kanagawa-wave h-full"></div>
+
+                    <!-- Derivco -->
+                    <div class="relative mb-12 animate-on-scroll">
+                        <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-kanagawa-orange rounded-full border-4 border-kanagawa-bgLight shadow-lg"></div>
+                        <div class="ml-12 md:ml-0 md:grid md:grid-cols-2 md:gap-8">
+                            <div class="md:text-right">
+                                <div class="bg-kanagawa-bg rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-kanagawa-wave">
+                                    <h3 class="text-2xl font-bold text-kanagawa-fg mb-2">Derivco</h3>
+                                    
+                                    <div class="mb-4">
+                                        <h4 class="text-lg font-semibold text-kanagawa-orange">Developer L2</h4>
+                                        <div class="flex items-center text-kanagawa-fgDark text-sm mb-2">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            July 2024 - May 2025
+                                            <span class="ml-2 px-2 py-1 bg-kanagawa-green/20 text-kanagawa-green rounded-full text-xs">Current</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h4 class="text-lg font-semibold text-kanagawa-orange">Software Development Engineer in Test (SDET) L2</h4>
+                                        <div class="flex items-center text-kanagawa-fgDark text-sm mb-2">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            July 2024 - May 2025
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h4 class="text-lg font-semibold text-kanagawa-orange">Software Development Engineer in Test (SDET) L1</h4>
+                                        <div class="flex items-center text-kanagawa-fgDark text-sm mb-4">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            June 2023 - June 2024
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h5 class="font-semibold text-kanagawa-yellow mb-2">Key Achievements:</h5>
+                                        <ul class="space-y-2">
+                                            <li class="text-kanagawa-fgDark text-sm flex items-start">
+                                                <span class="w-2 h-2 bg-kanagawa-orange rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                Developed a test harness that enabled full automation of end-to-end testing in Azure Pipelines
+                                            </li>
+                                            <li class="text-kanagawa-fgDark text-sm flex items-start">
+                                                <span class="w-2 h-2 bg-kanagawa-orange rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                Designed and architected a new messaging system for web application integration
+                                            </li>
+                                            <li class="text-kanagawa-fgDark text-sm flex items-start">
+                                                <span class="w-2 h-2 bg-kanagawa-orange rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                Developed a logging service handling millions of messages across multiple countries
+                                            </li>
+                                            <li class="text-kanagawa-fgDark text-sm flex items-start">
+                                                <span class="w-2 h-2 bg-kanagawa-orange rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                Implemented CI/CD processes and performed performance testing
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Iteiga Technologies -->
+                    <div class="relative mb-12 animate-on-scroll">
+                        <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-kanagawa-orange rounded-full border-4 border-kanagawa-bgLight shadow-lg"></div>
+                        <div class="ml-12 md:ml-0 md:grid md:grid-cols-2 md:gap-8">
+                            <div class="md:col-start-2">
+                                <div class="bg-kanagawa-bg rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-kanagawa-wave">
+                                    <h3 class="text-2xl font-bold text-kanagawa-fg mb-2">Iteiga Technologies</h3>
+                                    
+                                    <div class="mb-4">
+                                        <h4 class="text-lg font-semibold text-kanagawa-orange">Full Stack Developer</h4>
+                                        <div class="flex items-center text-kanagawa-fgDark text-sm mb-4">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            Dec 2020 - Present
+                                            <span class="ml-2 px-2 py-1 bg-kanagawa-green/20 text-kanagawa-green rounded-full text-xs">Current</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h5 class="font-semibold text-kanagawa-yellow mb-3">Key Projects:</h5>
+                                        <div class="space-y-3">
+                                            <div class="p-3 bg-kanagawa-bgLight rounded-lg">
+                                                <div class="flex items-center justify-between mb-1">
+                                                    <h6 class="font-semibold text-kanagawa-fg">Customer Portal</h6>
+                                                    <span class="text-xs text-kanagawa-fgDark">Jan 2023 - Present</span>
+                                                </div>
+                                                <p class="text-sm text-kanagawa-fgDark mb-2">Web-based customer portal for service management, invoicing, and support tickets</p>
+                                                <div class="flex flex-wrap gap-1">
+                                                    <span class="px-2 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded text-xs">Blazor WASM</span>
+                                                    <span class="px-2 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded text-xs">.NET 6 LTS</span>
+                                                    <span class="px-2 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded text-xs">DevExpress</span>
+                                                </div>
+                                            </div>
+                                            <div class="p-3 bg-kanagawa-bgLight rounded-lg">
+                                                <div class="flex items-center justify-between mb-1">
+                                                    <h6 class="font-semibold text-kanagawa-fg">FTTH Order Portal</h6>
+                                                    <span class="text-xs text-kanagawa-fgDark">Oct 2022 - Dec 2022</span>
+                                                </div>
+                                                <p class="text-sm text-kanagawa-fgDark mb-2">Order portal for location-based fibre service ordering with ISP integration</p>
+                                                <div class="flex flex-wrap gap-1">
+                                                    <span class="px-2 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded text-xs">Angular</span>
+                                                    <span class="px-2 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded text-xs">Bootstrap</span>
+                                                    <span class="px-2 py-1 bg-kanagawa-blue/20 text-kanagawa-blue rounded text-xs">Google Maps</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SoftServe -->
+                    <div class="relative mb-12 animate-on-scroll">
+                        <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-kanagawa-orange rounded-full border-4 border-kanagawa-bgLight shadow-lg"></div>
+                        <div class="ml-12 md:ml-0 md:grid md:grid-cols-2 md:gap-8">
+                            <div class="md:text-right">
+                                <div class="bg-kanagawa-bg rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-kanagawa-wave">
+                                    <h3 class="text-2xl font-bold text-kanagawa-fg mb-2">SoftServe Digital Development</h3>
+                                    
+                                    <div class="mb-4">
+                                        <h4 class="text-lg font-semibold text-kanagawa-orange">Junior Developer</h4>
+                                        <div class="flex items-center text-kanagawa-fgDark text-sm mb-4">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            Aug 2020 - Dec 2020
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h5 class="font-semibold text-kanagawa-yellow mb-2">Key Achievements:</h5>
+                                        <ul class="space-y-2">
+                                            <li class="text-kanagawa-fgDark text-sm flex items-start">
+                                                <span class="w-2 h-2 bg-kanagawa-orange rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                Translated mock-ups and wireframes into functioning front-end code
+                                            </li>
+                                            <li class="text-kanagawa-fgDark text-sm flex items-start">
+                                                <span class="w-2 h-2 bg-kanagawa-orange rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                Built and managed numerous WordPress sites
+                                            </li>
+                                            <li class="text-kanagawa-fgDark text-sm flex items-start">
+                                                <span class="w-2 h-2 bg-kanagawa-orange rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                Implemented SEO optimization and Google Analytics
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h5 class="font-semibold text-kanagawa-yellow mb-2">Technologies:</h5>
+                                        <p class="text-sm text-kanagawa-fgDark">CSS, Razor View (.NET), Bootstrap, Angular, JavaScript, ASP.NET Core MVC, C#, Entity Framework, SQL</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-kanagawa-bg">
+        <div class="section-container">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-kanagawa-fg">
+                    Education
+                </h2>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-kanagawa-bgLight rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-kanagawa-wave text-center animate-on-scroll">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 bg-kanagawa-yellow/20 rounded-full flex items-center justify-center border border-kanagawa-yellow/30">
+                                <i data-lucide="award" class="w-8 h-8 text-kanagawa-yellow"></i>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-kanagawa-fg mb-2">
+                            IIE Varsity College
+                        </h3>
+                        
+                        <h4 class="text-xl font-semibold text-kanagawa-orange mb-4">
+                            Bachelor of Computer and Information Sciences in Application Development
+                        </h4>
+                        
+                        <div class="flex items-center justify-center text-kanagawa-fgDark text-sm mb-8">
+                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                            Sept 2014 - Apr 2019
+                        </div>
+                        
+                        <div class="border-t border-kanagawa-wave pt-6">
+                            <h5 class="text-lg font-semibold text-kanagawa-teal mb-4">
+                                Key Courses & Specializations
+                            </h5>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="flex items-start p-4 bg-kanagawa-bg rounded-lg text-left border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-blue rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-kanagawa-fg">Object-Oriented Programming in C# and Java</span>
+                                </div>
+                                <div class="flex items-start p-4 bg-kanagawa-bg rounded-lg text-left border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-blue rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-kanagawa-fg">Native Android Development</span>
+                                </div>
+                                <div class="flex items-start p-4 bg-kanagawa-bg rounded-lg text-left border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-blue rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-kanagawa-fg">Database Management Systems</span>
+                                </div>
+                                <div class="flex items-start p-4 bg-kanagawa-bg rounded-lg text-left border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-blue rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-kanagawa-fg">Cloud Computing</span>
+                                </div>
+                                <div class="flex items-start p-4 bg-kanagawa-bg rounded-lg text-left border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-blue rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-kanagawa-fg">Computer Networking</span>
+                                </div>
+                                <div class="flex items-start p-4 bg-kanagawa-bg rounded-lg text-left border border-kanagawa-wave">
+                                    <div class="w-2 h-2 bg-kanagawa-blue rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-kanagawa-fg">Project Management</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-6 bg-kanagawa-green/10 rounded-lg border border-kanagawa-green/30">
+                            <h5 class="font-semibold text-kanagawa-green mb-2">Academic Focus</h5>
+                            <p class="text-kanagawa-fgDark text-sm">
+                                Specialized in modern software development practices with emphasis on 
+                                object-oriented programming, mobile development, and cloud technologies. 
+                                Gained comprehensive knowledge in database design, system architecture, 
+                                and project management methodologies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-kanagawa-bgLight">
+        <div class="section-container">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-kanagawa-fg">
+                    Certifications
+                </h2>
+                <p class="text-center text-kanagawa-fgDark mb-16 max-w-3xl mx-auto">
+                    Professional certifications that validate my expertise in software testing, quality assurance, and cloud technologies.
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- ISTQB Certification -->
+                    <div class="bg-kanagawa-bg rounded-lg p-6 border border-kanagawa-wave hover:border-kanagawa-orange transition-all duration-300 group hover:shadow-lg animate-on-scroll">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-kanagawa-orange/10 rounded-lg group-hover:bg-kanagawa-orange/20 transition-colors">
+                                    <i data-lucide="award" class="w-6 h-6 text-kanagawa-orange"></i>
+                                </div>
+                            </div>
+                            <i data-lucide="check-circle" class="w-5 h-5 text-kanagawa-green"></i>
+                        </div>
+
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-kanagawa-fg mb-2 group-hover:text-kanagawa-orange transition-colors">
+                                ISTQB Certified Tester Foundation Level
+                            </h3>
+                            <p class="text-kanagawa-yellow font-medium mb-2">International Software Testing Qualifications Board</p>
+                            
+                            <div class="flex items-center space-x-4 text-sm text-kanagawa-fgDark mb-3">
+                                <div class="flex items-center space-x-1">
+                                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                                    <span>Issued: 2023</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-kanagawa-fgDark mb-3 font-mono bg-kanagawa-bgLight px-2 py-1 rounded">
+                                ID: ISTQB-CTFL
+                            </p>
+                        </div>
+
+                        <p class="text-kanagawa-fgDark text-sm mb-4 leading-relaxed">
+                            Comprehensive understanding of software testing fundamentals, test design techniques, test management, and tool support for testing.
+                        </p>
+
+                        <div class="space-y-2">
+                            <h4 class="text-sm font-medium text-kanagawa-fg">Key Skills:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Software Testing</span>
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Test Design</span>
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Quality Assurance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Azure Fundamentals -->
+                    <div class="bg-kanagawa-bg rounded-lg p-6 border border-kanagawa-wave hover:border-kanagawa-orange transition-all duration-300 group hover:shadow-lg animate-on-scroll">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-kanagawa-orange/10 rounded-lg group-hover:bg-kanagawa-orange/20 transition-colors">
+                                    <i data-lucide="award" class="w-6 h-6 text-kanagawa-orange"></i>
+                                </div>
+                                <a href="https://learn.microsoft.com/en-us/credentials/" target="_blank" rel="noopener noreferrer" class="p-1 text-kanagawa-fgDark hover:text-kanagawa-orange transition-colors" title="Verify Certification">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                            <i data-lucide="check-circle" class="w-5 h-5 text-kanagawa-green"></i>
+                        </div>
+
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-kanagawa-fg mb-2 group-hover:text-kanagawa-orange transition-colors">
+                                Microsoft Certified: Azure Fundamentals
+                            </h3>
+                            <p class="text-kanagawa-yellow font-medium mb-2">Microsoft</p>
+                            
+                            <div class="flex items-center space-x-4 text-sm text-kanagawa-fgDark mb-3">
+                                <div class="flex items-center space-x-1">
+                                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                                    <span>Issued: 2023</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-kanagawa-fgDark mb-3 font-mono bg-kanagawa-bgLight px-2 py-1 rounded">
+                                ID: AZ-900
+                            </p>
+                        </div>
+
+                        <p class="text-kanagawa-fgDark text-sm mb-4 leading-relaxed">
+                            Foundational knowledge of cloud services and how those services are provided with Microsoft Azure.
+                        </p>
+
+                        <div class="space-y-2">
+                            <h4 class="text-sm font-medium text-kanagawa-fg">Key Skills:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Microsoft Azure</span>
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Cloud Computing</span>
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Azure Services</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Azure Administrator -->
+                    <div class="bg-kanagawa-bg rounded-lg p-6 border border-kanagawa-wave hover:border-kanagawa-orange transition-all duration-300 group hover:shadow-lg animate-on-scroll">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-kanagawa-orange/10 rounded-lg group-hover:bg-kanagawa-orange/20 transition-colors">
+                                    <i data-lucide="award" class="w-6 h-6 text-kanagawa-orange"></i>
+                                </div>
+                                <a href="https://learn.microsoft.com/en-us/credentials/" target="_blank" rel="noopener noreferrer" class="p-1 text-kanagawa-fgDark hover:text-kanagawa-orange transition-colors" title="Verify Certification">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                            <i data-lucide="check-circle" class="w-5 h-5 text-kanagawa-green"></i>
+                        </div>
+
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-kanagawa-fg mb-2 group-hover:text-kanagawa-orange transition-colors">
+                                Microsoft Certified: Azure Administrator Associate
+                            </h3>
+                            <p class="text-kanagawa-yellow font-medium mb-2">Microsoft</p>
+                            
+                            <div class="flex items-center space-x-4 text-sm text-kanagawa-fgDark mb-3">
+                                <div class="flex items-center space-x-1">
+                                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                                    <span>Issued: 2023</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                                    <span>Expires: 2025</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-kanagawa-fgDark mb-3 font-mono bg-kanagawa-bgLight px-2 py-1 rounded">
+                                ID: AZ-104
+                            </p>
+                        </div>
+
+                        <p class="text-kanagawa-fgDark text-sm mb-4 leading-relaxed">
+                            Skills to implement, manage, and monitor an organization's Microsoft Azure environment.
+                        </p>
+
+                        <div class="space-y-2">
+                            <h4 class="text-sm font-medium text-kanagawa-fg">Key Skills:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Azure Administration</span>
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Virtual Machines</span>
+                                <span class="px-3 py-1 bg-kanagawa-wave text-kanagawa-fg text-xs rounded-full">Networking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12 animate-on-scroll">
+                    <p class="text-kanagawa-fgDark mb-6">
+                        Continuously expanding my knowledge and staying current with industry standards.
+                    </p>
+                    <button onclick="window.open('https://www.linkedin.com/in/kailashrajh/', '_blank')" class="bg-kanagawa-orange text-kanagawa-bg px-6 py-3 rounded-lg font-medium hover:bg-kanagawa-yellow transition-colors shadow-lg">
+                        View More on LinkedIn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-kanagawa-bgDark text-kanagawa-fg">
+        <div class="section-container">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-kanagawa-fg">
+                    Get In Touch
+                </h2>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12 animate-on-scroll">
+                        <p class="text-xl text-kanagawa-yellow mb-6">
+                            I'm always interested in discussing new opportunities, innovative projects, 
+                            and potential collaborations. Let's connect!
+                        </p>
+                        <p class="text-kanagawa-fgDark">
+                            Whether you're looking for a dedicated developer, need assistance with testing automation, 
+                            or want to explore how I can contribute to your team, I'd love to hear from you.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8 mb-12">
+                        <div class="text-center p-6 bg-kanagawa-bg rounded-lg hover:bg-kanagawa-bgLight transition-colors border border-kanagawa-wave animate-on-scroll">
+                            <div class="w-12 h-12 bg-kanagawa-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="mail" class="w-6 h-6 text-kanagawa-fg"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Email</h3>
+                            <a href="mailto:kailash.rajh@gmail.com" class="text-kanagawa-orange hover:text-kanagawa-yellow transition-colors">
+                                kailash.rajh@gmail.com
+                            </a>
+                        </div>
+
+                        <div class="text-center p-6 bg-kanagawa-bg rounded-lg hover:bg-kanagawa-bgLight transition-colors border border-kanagawa-wave animate-on-scroll">
+                            <div class="w-12 h-12 bg-kanagawa-green rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="phone" class="w-6 h-6 text-kanagawa-fg"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Phone</h3>
+                            <a href="tel:071-605-3159" class="text-kanagawa-orange hover:text-kanagawa-yellow transition-colors">
+                                071-605-3159
+                            </a>
+                        </div>
+
+                        <div class="text-center p-6 bg-kanagawa-bg rounded-lg hover:bg-kanagawa-bgLight transition-colors border border-kanagawa-wave animate-on-scroll">
+                            <div class="w-12 h-12 bg-kanagawa-teal rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-kanagawa-fg"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Location</h3>
+                            <span class="text-kanagawa-fgDark">South Africa</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center animate-on-scroll">
+                        <h3 class="text-2xl font-semibold mb-6">Let's Connect</h3>
+                        <div class="flex justify-center space-x-6">
+                            <a href="mailto:kailash.rajh@gmail.com" class="bg-kanagawa-blue hover:bg-kanagawa-purple text-kanagawa-fg px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center gap-2">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                                Send Email
+                            </a>
+                            <a href="https://linkedin.com/in/kailashrajh" target="_blank" rel="noopener noreferrer" class="bg-kanagawa-bgLight hover:bg-kanagawa-bg text-kanagawa-fg px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center gap-2 border border-kanagawa-wave">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-16 pt-8 border-t border-kanagawa-wave text-center">
+            <p class="text-kanagawa-fgDark">
+                © 2025 Kailash Rajh. Built with HTML, CSS, and JavaScript.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill bars
+                    const skillBars = entry.target.querySelectorAll('.skill-bar');
+                    skillBars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            const width = bar.getAttribute('data-width');
+                            bar.style.width = width + '%';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Navigation highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function updateActiveNavLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-kanagawa-blue');
+                link.classList.add('text-kanagawa-fgDark');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.remove('text-kanagawa-fgDark');
+                    link.classList.add('text-kanagawa-blue');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveNavLink);
+        updateActiveNavLink(); // Initial call
+    </script>
+</body>
 </html>
